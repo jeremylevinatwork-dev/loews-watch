@@ -1,0 +1,21 @@
+name: watchOS build
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Unzip project
+        run: unzip loews-watch-app-v1.zip
+      - name: Build watchOS app (unsigned)
+        run: |
+          xcodebuild -project loews-watch/LoewsWatch.xcodeproj \
+            -scheme LoewsWatch \
+            -sdk watchos \
+            -destination 'generic/platform=watchOS' \
+            CODE_SIGNING_ALLOWED=NO \
+            build
