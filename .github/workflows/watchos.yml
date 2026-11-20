@@ -11,11 +11,11 @@ jobs:
       - uses: actions/checkout@v4
       - name: Unzip project
         run: unzip loews-watch-app-v1.zip
-      - name: Build watchOS app (unsigned)
+      - name: Build watchOS app for simulator (unsigned)
         run: |
           xcodebuild -project loews-watch/LoewsWatch.xcodeproj \
             -scheme LoewsWatch \
-            -sdk watchos \
-            -destination 'generic/platform=watchOS' \
+            -sdk watchsimulator \
+            -destination 'generic/platform=watchOS Simulator' \
             CODE_SIGNING_ALLOWED=NO \
             build
